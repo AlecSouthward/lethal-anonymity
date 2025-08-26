@@ -1,6 +1,6 @@
 # Lethal Anonymity
 
-> [!INFO]
+> [!IMPORTANT]
 > This is a client-side only mod!
 
 This is a Lethal Company mod that hides the identity of all players in a lobby.
