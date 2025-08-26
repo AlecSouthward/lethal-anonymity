@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <AssemblyName>LethalAnonymity</AssemblyName>
-        <Version>0.0.0</Version>
+        <Version>1.0.0</Version>
         <TargetFramework>netstandard2.1</TargetFramework>
         <LangVersion>latest</LangVersion>
 
