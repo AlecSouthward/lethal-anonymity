@@ -19,14 +19,14 @@ class Config
             "General",
             "Username",
             "Player",
-            "Username to replace your own with"
+            "Name to replace other players' usernames with"
         );
 
         HideProfilePicture = cfg.Bind(
             "General",
             "HideProfilePicture",
             true,
-            "Show/hide your profile picture in-game"
+            "Show/hide other players' profile pictures in-game (if hidden displays a placeholder picture)"
         );
 
         ClearOrphanedEntries(cfg);
