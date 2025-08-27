@@ -56,16 +56,6 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Download DLLs
-        uses: actions/download-artifact@v4
-        with:
-          name: release-dlls
-          path: output
-
-      - name: Package DLLs
-        run: |
-          zip -j output/LethalAnonymity_${{ github.event.release.tag_name }}.zip output/*.dll
-
       - name: Publish to Thunderstore
         uses: GreenTF/upload-thunderstore-package@v4.3
         with:
