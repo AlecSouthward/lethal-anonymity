@@ -27,7 +27,7 @@ jobs:
         run: dotnet publish ./LethalAnonymity/LethalAnonymity.csproj -c Release -o ./output
 
       - name: Rename DLL
-        run: mv output/LethalAnonymity.dll output/LethalAnonymity${{ github.event.release.tag_name }}.dll
+        run: mv output/LethalAnonymity.dll output/LethalAnonymity_${{ github.event.release.tag_name }}.dll
 
       - name: Upload DLLs
         uses: actions/upload-artifact@v4
@@ -61,6 +61,10 @@ jobs:
         with:
           name: release-dlls
           path: output/*.dll
+      
+      - name: Package DLLs
+        run: |
+          zip -j output/LethalAnonymity_${{ github.event.release.tag_name }}.zip output/*.dll
 
       - name: Publish to Thunderstore
         uses: GreenTF/upload-thunderstore-package@v4.3
@@ -76,7 +80,7 @@ jobs:
             bepinex
             clientside
             tweaks-and-quality-of-life
-          path: output/*.dll
+          file: output/LethalAnonymity_${{ github.event.release.tag_name }}.zip
 
       - name: Output URL
         run: echo "Published to ${{ steps.publish.outputs.url }}"
