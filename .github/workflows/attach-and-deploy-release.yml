@@ -1,0 +1,79 @@
+name: Deploy to Thunderstore and Attach DLLs to release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Publish (Release)
+        run: dotnet publish ./LethalAnonymity/LethalAnonymity.csproj -c Release -o ./output
+
+      - name: Upload DLLs
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-dlls
+          path: output/LethalAnonymity.dll
+          retention-days: 7
+
+  attach_release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - name: Download DLLs
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dlls
+          path: output
+
+      - name: Attach to Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: output/LethalAnonymity.dll
+  
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download DLLs
+        uses: actions/download-artifact@v4
+        with:
+          name: release-dlls
+          path: output/LethalAnonymity.dll
+
+      - name: Publish to Thunderstore
+        uses: GreenTF/upload-thunderstore-package@v4.3
+        with:
+          token: ${{ secrets.TS_TOKEN }}
+          namespace: ASouth
+          name: Lethal Anonymity
+          description: Lethal Company mod that hides the identity of all players in a lobby
+          version: ${{ github.event.release.tag_name }}
+          communities: lethal-company
+          categories: |
+            misc
+            bepinex
+            clientside
+            tweaks-and-quality-of-life
+          path: output/LethalAnonymity.dll
+
+      - name: Output URL
+        run: echo "Published to ${{ steps.publish.outputs.url }}"
