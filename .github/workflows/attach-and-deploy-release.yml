@@ -26,11 +26,14 @@ jobs:
       - name: Publish (Release)
         run: dotnet publish ./LethalAnonymity/LethalAnonymity.csproj -c Release -o ./output
 
+      - name: Rename DLL
+        run: mv output/LethalAnonymity.dll output/LethalAnonymity${{ github.event.release.tag_name }}.dll
+
       - name: Upload DLLs
         uses: actions/upload-artifact@v4
         with:
           name: release-dlls
-          path: output/LethalAnonymity.dll
+          path: output/*.dll
           retention-days: 7
 
   attach_release:
@@ -47,7 +50,7 @@ jobs:
       - name: Attach to Release
         uses: softprops/action-gh-release@v2
         with:
-          files: output/LethalAnonymity.dll
+          files: output/*.dll
   
   publish:
     needs: build
@@ -57,7 +60,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: release-dlls
-          path: output/LethalAnonymity.dll
+          path: output/*.dll
 
       - name: Publish to Thunderstore
         uses: GreenTF/upload-thunderstore-package@v4.3
@@ -67,13 +70,13 @@ jobs:
           name: Lethal Anonymity
           description: Lethal Company mod that hides the identity of all players in a lobby
           version: ${{ github.event.release.tag_name }}
-          communities: lethal-company
+          community: lethal-company
           categories: |
             misc
             bepinex
             clientside
             tweaks-and-quality-of-life
-          path: output/LethalAnonymity.dll
+          path: output/*.dll
 
       - name: Output URL
         run: echo "Published to ${{ steps.publish.outputs.url }}"
