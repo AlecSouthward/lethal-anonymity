@@ -74,7 +74,7 @@ jobs:
           name: Lethal Anonymity
           description: Lethal Company mod that hides the identity of all players in a lobby
           version: ${{ github.event.release.tag_name }}
-          path: /output/
+          path: /output
           repo: thunderstore.io
           community: lethal-company
           categories: |
