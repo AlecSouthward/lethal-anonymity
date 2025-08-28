@@ -64,7 +64,7 @@ jobs:
 
       - name: ZIP the Built Output
         run: |
-          cp output/ dist/
+          cp -r output/ dist/
 
       - name: Publish to Thunderstore
         uses: dhkatz/thunderstore-publish@v1.0.1
