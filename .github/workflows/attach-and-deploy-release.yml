@@ -64,7 +64,7 @@ jobs:
 
       - name: ZIP the Built Output
         run: |
-          ls && zip -r LethalAnonymity_${{ github.event.release.tag_name }}.zip output/
+          mkdir dist && zip -r dist/LethalAnonymity_${{ github.event.release.tag_name }}.zip output/*.dll
 
       - name: Publish to Thunderstore
         uses: dhkatz/thunderstore-publish@v1.0.1
