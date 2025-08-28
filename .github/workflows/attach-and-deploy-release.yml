@@ -62,11 +62,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: release-dlls
-          path: output
+          path: dist
 
       - name: Copy necessary files to Output directory
         run: |
-          cp -r output/ dist/ && cp icon.png dist/ && cp README.md dist/ && cp icon.png output/ && cp README.md output/
+          cp icon.png dist/ && cp README.md dist/
 
       - name: Publish to Thunderstore
         uses: GreenTF/upload-thunderstore-package@v4.3
@@ -76,7 +76,6 @@ jobs:
           name: LethalAnonymity
           description: Lethal Company mod that hides the identity of all players in a lobby
           version: ${{ github.event.release.tag_name }}
-          path: output
           repo: thunderstore.io
           community: lethal-company
           categories: |
@@ -84,3 +83,5 @@ jobs:
             bepinex
             clientside
             tweaks-and-quality-of-life
+          deps: |
+            BepInEx-BepInExPack-5.4.2100
