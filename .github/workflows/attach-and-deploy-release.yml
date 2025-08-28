@@ -62,6 +62,10 @@ jobs:
           name: release-dlls
           path: output
 
+      - name: ZIP the Built Output
+        run: |
+          cp output/ dist/
+
       - name: Publish to Thunderstore
         uses: dhkatz/thunderstore-publish@v1.0.1
         with:
