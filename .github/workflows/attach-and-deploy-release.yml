@@ -64,9 +64,9 @@ jobs:
           name: release-dlls
           path: output
 
-      - name: ZIP the Built Output
+      - name: Copy necessary files to Output directory
         run: |
-          cp -r output/ dist/
+          cp -r output/ dist/ && cp icon.png dist/ && cp README.md dist/ && cp icon.png output/ && cp README.md output/
 
       - name: Publish to Thunderstore
         uses: GreenTF/upload-thunderstore-package@v4.3
