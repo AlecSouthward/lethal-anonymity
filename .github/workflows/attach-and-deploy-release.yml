@@ -66,6 +66,10 @@ jobs:
         run: |
           mkdir dist && zip -r dist/LethalAnonymity_${{ github.event.release.tag_name }}.zip output/*.dll
 
+      - name: Check directories
+        run: |
+          ls && ls output && ls dist
+
       - name: Publish to Thunderstore
         uses: dhkatz/thunderstore-publish@v1.0.1
         with:
@@ -81,7 +85,7 @@ jobs:
             bepinex
             clientside
             tweaks-and-quality-of-life
-          file: LethalAnonymity_${{ github.event.release.tag_name }}.zip
+          file: dist/LethalAnonymity_${{ github.event.release.tag_name }}.zip
 
       - name: Output URL
         run: echo "Published to ${{ steps.publish.outputs.url }}"
