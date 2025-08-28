@@ -67,7 +67,7 @@ jobs:
           cp -r output/ dist/
 
       - name: Publish to Thunderstore
-        uses: dhkatz/thunderstore-publish@v1.0.1
+        uses: GreenTF/upload-thunderstore-package@v4.3
         with:
           token: ${{ secrets.TS_TOKEN }}
           namespace: ASouth
@@ -75,11 +75,10 @@ jobs:
           description: Lethal Company mod that hides the identity of all players in a lobby
           version: ${{ github.event.release.tag_name }}
           path: /output/
-          # repo: https://github.com/AlecSouthward/lethal-anonymity
-          communities: |
-            lethal-company
-          # categories: |
-          #   misc
-          #   bepinex
-          #   clientside
-          #   tweaks-and-quality-of-life
+          repo: thunderstore.io
+          community: lethal-company
+          categories: |
+            misc
+            bepinex
+            clientside
+            tweaks-and-quality-of-life
