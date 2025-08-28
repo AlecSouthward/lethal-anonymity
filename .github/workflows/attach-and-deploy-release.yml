@@ -66,6 +66,9 @@ jobs:
         run: |
           cp -r output/ dist/
 
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Publish to Thunderstore
         uses: GreenTF/upload-thunderstore-package@v4.3
         with:
