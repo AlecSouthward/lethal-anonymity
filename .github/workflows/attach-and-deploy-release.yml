@@ -64,10 +64,6 @@ jobs:
           name: release-dlls
           path: dist
 
-      - name: Copy necessary files to Output directory
-        run: |
-          cp icon.png dist/ && cp README.md dist/
-
       - name: Publish to Thunderstore
         uses: GreenTF/upload-thunderstore-package@v4.3
         with:
@@ -76,6 +72,7 @@ jobs:
           name: LethalAnonymity
           description: Lethal Company mod that hides the identity of all players in a lobby
           version: ${{ github.event.release.tag_name }}
+          path: dist
           repo: thunderstore.io
           community: lethal-company
           categories: |
