@@ -78,8 +78,8 @@ jobs:
           # repo: https://github.com/AlecSouthward/lethal-anonymity
           communities: |
             lethal-company
-          categories: |
-            misc
-            bepinex
-            clientside
-            tweaks-and-quality-of-life
+          # categories: |
+          #   misc
+          #   bepinex
+          #   clientside
+          #   tweaks-and-quality-of-life
