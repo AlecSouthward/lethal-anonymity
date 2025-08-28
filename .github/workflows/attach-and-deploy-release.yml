@@ -62,14 +62,6 @@ jobs:
           name: release-dlls
           path: output
 
-      - name: ZIP the Built Output
-        run: |
-          mkdir dist && zip -r dist/LethalAnonymity_${{ github.event.release.tag_name }}.zip output/*.dll
-
-      - name: Check directories
-        run: |
-          ls && ls output && ls dist
-
       - name: Publish to Thunderstore
         uses: dhkatz/thunderstore-publish@v1.0.1
         with:
@@ -78,6 +70,8 @@ jobs:
           name: Lethal Anonymity
           description: Lethal Company mod that hides the identity of all players in a lobby
           version: ${{ github.event.release.tag_name }}
+          path: /output/
+          repo: https://github.com/AlecSouthward/lethal-anonymity
           communities: |
             lethal-company
           categories: |
@@ -85,7 +79,6 @@ jobs:
             bepinex
             clientside
             tweaks-and-quality-of-life
-          file: dist/LethalAnonymity_${{ github.event.release.tag_name }}.zip
 
       - name: Output URL
         run: echo "Published to ${{ steps.publish.outputs.url }}"
