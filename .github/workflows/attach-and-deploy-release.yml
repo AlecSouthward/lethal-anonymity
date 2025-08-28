@@ -58,8 +58,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: ZIP the Built Output
+        run: |
+          zip -r LethalAnonymity_${{ github.event.release.tag_name }}.zip output/
+
       - name: Publish to Thunderstore
-        uses: GreenTF/upload-thunderstore-package@v4.3
+        uses: dhkatz/thunderstore-publish@v1
         with:
           token: ${{ secrets.TS_TOKEN }}
           namespace: ASouth
@@ -72,7 +76,7 @@ jobs:
             bepinex
             clientside
             tweaks-and-quality-of-life
-          file: output/LethalAnonymity_${{ github.event.release.tag_name }}.zip
+          file: LethalAnonymity_${{ github.event.release.tag_name }}.zip
 
       - name: Output URL
         run: echo "Published to ${{ steps.publish.outputs.url }}"
