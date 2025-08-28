@@ -51,34 +51,3 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: output/*.dll
-  
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Download DLLs
-        uses: actions/download-artifact@v4
-        with:
-          name: release-dlls
-          path: dist
-
-      - name: Publish to Thunderstore
-        uses: GreenTF/upload-thunderstore-package@v4.3
-        with:
-          token: ${{ secrets.TS_TOKEN }}
-          namespace: ASouth
-          name: LethalAnonymity
-          description: Lethal Company mod that hides the identity of all players in a lobby
-          version: ${{ github.event.release.tag_name }}
-          path: dist
-          repo: thunderstore.io
-          community: lethal-company
-          categories: |
-            misc
-            bepinex
-            clientside
-            tweaks-and-quality-of-life
-          deps: |
-            BepInEx-BepInExPack-5.4.2100
