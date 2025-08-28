@@ -75,7 +75,7 @@ jobs:
           description: Lethal Company mod that hides the identity of all players in a lobby
           version: ${{ github.event.release.tag_name }}
           path: /output/
-          repo: https://github.com/AlecSouthward/lethal-anonymity
+          # repo: https://github.com/AlecSouthward/lethal-anonymity
           communities: |
             lethal-company
           categories: |
@@ -83,6 +83,3 @@ jobs:
             bepinex
             clientside
             tweaks-and-quality-of-life
-
-      - name: Output URL
-        run: echo "Published to ${{ steps.publish.outputs.url }}"
