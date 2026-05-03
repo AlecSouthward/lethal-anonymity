@@ -18,7 +18,7 @@ class Config
         Username = cfg.Bind(
             "General",
             "Username",
-            "Player",
+            "Employee",
             "Name to replace other players' usernames with"
         );
 

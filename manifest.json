@@ -1,0 +1,7 @@
+{
+    "name": "LethalAnonymity",
+    "version_number": "1.1.1",
+    "website_url": "https://github.com/AlecSouthward/lethal-anonymity",
+    "description": "Lethal Company mod that hides the identity of all players in a lobby.",
+    "dependencies": ["BepInEx-BepInExPack-5.4.2100"]
+}
